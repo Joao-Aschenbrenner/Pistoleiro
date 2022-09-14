@@ -4,9 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.swing.JOptionPane;
 
 import com.TrovãoGameStudios.main.Game;
 import com.TrovãoGameStudios.world.Camera;
@@ -53,9 +50,7 @@ public class Enemy extends Entity {
 			
 		/*maskx = 8;masky = 8 ; maskw= 7 ; maskh = 7;*/
 			
-		//moved = false;
-		
-		if(isColiddingWithPlayer() == false) {
+		moved = false;
 		
 		if((int)x < Game.player.getX() && World.isFree((int)(x+speed),this.getY())
 				&& !isColidding((int)(x+speed),this.getY())) {
@@ -86,19 +81,6 @@ public class Enemy extends Entity {
 			
 			
 		}
-		 }else {
-			 //estamos colidindo
-			 if(Game.rand.nextInt(100)< 10) {
-			 Game.player.vida-=Game.rand.nextInt(3);
-			 Game.player.dano= true;
-			 
-			 
-			 System.out.println("Vida:" + Game.player.vida); 
-			
-			 }
-			 
-			 
-		 }
 		 
 		 
 		 if(moved) {
@@ -117,18 +99,6 @@ public class Enemy extends Entity {
 				}
 		
 	}
-	
-	public boolean isColiddingWithPlayer() {
-		
-		Rectangle enemyCurrent = new Rectangle(this.getX() + maskx,this.getY() + masky ,maskw,maskh);
-		Rectangle player= new Rectangle(Game.player.getX(),Game.player.getY(),16,16);
-		
-		
-		return enemyCurrent.intersects(player);
-		
-		
-	}
-	
 	public boolean isColidding(int xnext,int ynext ) {
 		
 		Rectangle enemyCurrent = new Rectangle(xnext + maskx,ynext + masky ,maskw,maskh);
@@ -160,7 +130,6 @@ public class Enemy extends Entity {
 				
 			}
 		
-	
 	//g.setColor(Color.blue);
 	//g.fillRect(this.getX() + maskx - Camera.x,this.getY() + masky - Camera.y,maskw,maskh);
 		

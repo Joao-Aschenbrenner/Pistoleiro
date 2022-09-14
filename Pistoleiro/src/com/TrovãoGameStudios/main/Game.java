@@ -4,12 +4,10 @@ package com.TrovãoGameStudios.main;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -19,9 +17,7 @@ import java.util.Random;
 import javax.swing.JFrame;
 
 import com.TrovãoGameStudios.graficos.Spritesheet;
-import com.TrovãoGameStudios.graficos.UI;
 import com.TrovãoGameStudios.world.World;
-import com.TrovãoGamesStudios.entities.Atirando;
 import com.TrovãoGamesStudios.entities.Enemy;
 import com.TrovãoGamesStudios.entities.Entity;
 import com.TrovãoGamesStudios.entities.Player;
@@ -44,8 +40,6 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	
 	public static List<Enemy> enemies;
 	
-	public static List<Atirando> Balas;
-	
 	public static Spritesheet spritesheet;
 	
 	public static World world;
@@ -54,8 +48,6 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	
     
     public static Random rand;
-    
-    public UI ui;
     
 	public Game() {
 		
@@ -68,15 +60,13 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		
 		//inicializando objetos
 		
-		ui = new UI();
+		
 		
 		image =  new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
 		
 		entities = new ArrayList<Entity>();
 		
 		enemies = new ArrayList<Enemy>();
-		
-	    Balas = new ArrayList<Atirando>();
 		
 		spritesheet = new Spritesheet("/SpriteSheet.png");
       
@@ -162,14 +152,6 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		}
 		
 		
-		for(int i = 0;i < Balas.size(); i++) {
-			
-			Balas.get(i).tick();
-			
-			
-		}
-		
-		
 	}
 	
 	public void render() {
@@ -196,26 +178,13 @@ public class Game extends Canvas implements Runnable,KeyListener{
 			e.render(g);
 			
 		}
-        
-        
-        for(int i = 0;i < Balas.size(); i++) {
-			
-			Balas.get(i).render(g);
-			
-			
-		}
-		ui.render(g);
-        
-		//Graphics2D g2 =(Graphics2D) g;
+		
+		Graphics2D g2 =(Graphics2D) g;
 		
 		
 		g.dispose();
 		g= bs.getDrawGraphics();
-		g.drawImage(image,0,0,WIDTH*SCALE,HEIGHT*SCALE,null);
-		g.setFont(new Font("arial",Font.BOLD,17));
-		g.setColor(Color.white);
-		g.drawString("Muinição: " + player.bala, 1, 45);
-		
+		g.drawImage(image,0,0,WIDTH*SCALE,HEIGHT*SCALE,null);		
 		bs.show();
 	}
 	
@@ -285,18 +254,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		
 		player.down = true;	
 	}
-	
-	if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-		
-		player.atirou=true;
-		
 	}
-	
-	
-
-	}
-	
-	
 	
 	
 	@Override

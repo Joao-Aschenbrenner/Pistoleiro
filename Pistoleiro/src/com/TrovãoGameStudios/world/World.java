@@ -68,7 +68,7 @@ public class World {
 				 
 			 }else if(pixelAtual == 0xFF00FFFF) {
 				 
-				 //Arma
+				 //WEPPON
 				 Game.entities.add(new Weppon(xx*16,yy*16,16,16,Entity.WEPPON_EN));
 				 
 			 }else if(pixelAtual == 0xFFFFD800) {
